@@ -1,0 +1,5 @@
+pydantic-ai
+nest-asyncio
+pydantic
+openai
+email-validator
