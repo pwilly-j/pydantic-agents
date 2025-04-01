@@ -1,8 +1,8 @@
 import streamlit as st
 import asyncio
-from app.models.company_agent import CompanyResearchAgent, CompanyResearchRequest
+from models.company_agent import CompanyResearchAgent, CompanyResearchRequest
 from pydantic_ai.models.openai import OpenAIModel
-from app.core.config import settings
+from core.config import settings
 
 # Initialize the research agent
 model = OpenAIModel("gpt-4")
