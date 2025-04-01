@@ -1,0 +1,32 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="research_agent_pydantic",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[
+        "streamlit>=1.32.0",
+        "fastapi>=0.109.0",
+        "uvicorn>=0.27.0",
+        "pydantic>=2.6.0",
+        "pydantic-settings==2.8.1",
+        "python-dotenv>=1.0.0",
+        "httpx>=0.26.0",
+        "beautifulsoup4>=4.12.0",
+        "linkedin-api>=2.0.0",
+        "openai>=1.3.0",
+        "python-multipart==0.0.9",
+        "notion-client==2.2.1",
+        "google-api-python-client==2.118.0",
+        "google-auth-oauthlib==1.2.0",
+        "python-jose==3.3.0",
+        "passlib==1.7.4",
+        "bcrypt==4.1.2",
+        "sqlalchemy==2.0.27",
+        "alembic==1.13.1",
+        "psycopg2-binary==2.9.9",
+        "pytest==8.0.1",
+        "email-validator==2.1.0.post1",
+        "pydantic-ai>=0.1.0",
+    ],
+) 

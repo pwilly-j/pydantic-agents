@@ -1,10 +1,14 @@
 import streamlit as st
 import asyncio
-import sys
 import os
 
+# Get the absolute path to the app directory
+APP_DIR = os.path.dirname(os.path.abspath(__file__))
+BACKEND_DIR = os.path.dirname(APP_DIR)
+
 # Add the backend directory to the Python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+if BACKEND_DIR not in os.sys.path:
+    os.sys.path.insert(0, BACKEND_DIR)
 
 from app.models.company_agent import CompanyResearchAgent, CompanyResearchRequest
 from pydantic_ai.models.openai import OpenAIModel
