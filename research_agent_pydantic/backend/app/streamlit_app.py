@@ -1,18 +1,16 @@
 import streamlit as st
 import asyncio
 import os
+import sys
 
-# Get the absolute path to the app directory
-APP_DIR = os.path.dirname(os.path.abspath(__file__))
-BACKEND_DIR = os.path.dirname(APP_DIR)
+# Add the project root to the Python path
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
 
-# Add the backend directory to the Python path
-if BACKEND_DIR not in os.sys.path:
-    os.sys.path.insert(0, BACKEND_DIR)
-
-from pydantic_agents.research_agent_pydantic.backend.app.models.company_agent import CompanyResearchAgent, CompanyResearchRequest
+from research_agent_pydantic.backend.app.models.company_agent import CompanyResearchAgent, CompanyResearchRequest
 from pydantic_ai.models.openai import OpenAIModel
-from pydantic_agents.research_agent_pydantic.backend.app.core.config import settings
+from research_agent_pydantic.backend.app.core.config import settings
 
 # Initialize the research agent
 model = OpenAIModel("gpt-4")
