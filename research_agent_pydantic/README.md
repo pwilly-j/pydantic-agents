@@ -1,90 +1,78 @@
 # Company Research Agent
 
-A web application that speeds up company research by providing quick, comprehensive company overviews and integrating with popular note-taking platforms.
+A powerful AI-powered tool for researching companies and generating comprehensive overviews using Streamlit and Pydantic.
 
 ## Features
 
-- Quick company research and overview generation using AI
-- Integration with Notion and Google Docs (requires API credentials)
-- Company information including:
-  - Website and LinkedIn links (requires LinkedIn credentials)
-  - Company summary and purpose
-  - Key products & features
+- Company research and analysis
+- LinkedIn integration for company data
+- Website scraping and analysis
+- Comprehensive company overviews including:
+  - Basic information
+  - Products and services
   - Competitors
   - Funding information
-  - Recent news and videos (coming soon)
-- Follow-up questions and interview preparation
-- Weekly email notifications for company updates (coming soon)
+  - Recent news
+  - Interview questions
 
-## Project Structure
+## Prerequisites
 
-```
-research_agent_pydantic/
-├── backend/
-│   ├── app/
-│   │   ├── api/
-│   │   ├── core/
-│   │   ├── models/
-│   │   ├── services/
-│   │   └── utils/
-│   ├── tests/
-│   └── alembic/
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   └── utils/
-│   └── public/
-└── docs/
+- Python 3.8 or higher
+- LinkedIn account (for accessing company data)
+- OpenAI API key
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd research_agent_pydantic
 ```
 
-## Setup
+2. Create a virtual environment and activate it:
+```bash
+python -m venv venv
+source venv/bin/activate  # On Windows, use: venv\Scripts\activate
+```
 
-1. Clone the repository
-2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
 3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Set up environment variables:
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration
-   ```
-5. Run the development server:
-   ```bash
-   uvicorn app.main:app --reload
-   ```
+```bash
+pip install -r requirements.txt
+```
 
-## Required API Keys
+4. Create a `.env` file in the root directory with your API keys:
+```env
+OPENAI_API_KEY=your_openai_api_key
+```
 
-The following API keys are required for full functionality:
-- OpenAI API Key (required)
-- LinkedIn credentials (required for company information)
-- Notion API Key and Database ID (optional, for Notion integration)
-- Google API credentials (optional, for Google Docs integration)
+## Running the Application
 
-## Development
+1. Start the Streamlit app:
+```bash
+streamlit run backend/app/streamlit_app.py
+```
 
-- Backend: FastAPI
-- Frontend: React
-- Database: PostgreSQL (planned for future use)
-- Authentication: JWT (planned for future use)
-- AI: OpenAI GPT-4
+2. Open your web browser and navigate to the URL shown in the terminal (typically http://localhost:8501)
 
-## Contributing
+3. Enter a company name and any additional context you'd like to focus on
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
+4. Click "Research Company" to start the analysis
+
+## Usage
+
+1. Enter the company name in the main input field
+2. Optionally add any specific aspects you'd like to focus on
+3. Click the "Research Company" button
+4. View the results in the organized tabs:
+   - Overview: Basic company information
+   - Products & Competitors: Company offerings and market position
+   - Funding & News: Financial information and recent updates
+   - Interview Questions: Suggested questions for further research
+
+## Note
+
+When using the LinkedIn integration, you'll be prompted to enter your LinkedIn credentials. These credentials are stored securely in memory and will expire after 30 days.
 
 ## License
 
-MIT 
+MIT License 
