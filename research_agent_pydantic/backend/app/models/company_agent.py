@@ -64,8 +64,8 @@ class CompanyResearchAgent(Agent):
                 "Always maintain objectivity and verify information from multiple sources."
             ),
             tools=[
-                Tool(self.get_website_info, takes_ctx=True),
-                Tool(self.get_linkedin_info, takes_ctx=True)
+                Tool(self.get_website_info),
+                Tool(self.get_linkedin_info)
             ]
         )
         self.http_client = httpx.AsyncClient()
@@ -224,6 +224,31 @@ class CompanyResearchAgent(Agent):
         except Exception:
             return False
 
+    async def _scrape_website(self, url: str) -> str:
+        """
+        Scrape content from a website.
+        """
+        try:
+            response = await self.http_client.get(url, headers=self.headers)
+            soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # Remove script and style elements
+            for script in soup(["script", "style"]):
+                script.decompose()
+            
+            # Get text content
+            text = soup.get_text()
+            
+            # Clean up text
+            lines = (line.strip() for line in text.splitlines())
+            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
+            text = ' '.join(chunk for chunk in chunks if chunk)
+            
+            return text
+        except Exception as e:
+            print(f"Error scraping website {url}: {str(e)}")
+            return ""
+
     @Tool(name="scrape_company_website")
     async def get_website_info(self, ctx: RunContext[CompanyResearchRequest]) -> Dict:
         """
@@ -329,30 +354,4 @@ class CompanyResearchAgent(Agent):
                 "content": "",
                 "status": "error",
                 "error": str(e)
-            }
-
-#Only used for scraping the main page of the company website.   
-    async def _scrape_website(self, url: str) -> str:
-        """
-        Scrape content from a website.
-        """
-        try:
-            response = await self.http_client.get(url, headers=self.headers)
-            soup = BeautifulSoup(response.text, 'html.parser')
-            
-            # Remove script and style elements
-            for script in soup(["script", "style"]):
-                script.decompose()
-            
-            # Get text content
-            text = soup.get_text()
-            
-            # Clean up text
-            lines = (line.strip() for line in text.splitlines())
-            chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-            text = ' '.join(chunk for chunk in chunks if chunk)
-            
-            return text
-        except Exception as e:
-            print(f"Error scraping website {url}: {str(e)}")
-            return "" 
+            } 
