@@ -10,9 +10,9 @@ BACKEND_DIR = os.path.dirname(APP_DIR)
 if BACKEND_DIR not in os.sys.path:
     os.sys.path.insert(0, BACKEND_DIR)
 
-from app.models.company_agent import CompanyResearchAgent, CompanyResearchRequest
+from pydantic_agents.research_agent_pydantic.backend.app.models.company_agent import CompanyResearchAgent, CompanyResearchRequest
 from pydantic_ai.models.openai import OpenAIModel
-from app.core.config import settings
+from pydantic_agents.research_agent_pydantic.backend.app.core.config import settings
 
 # Initialize the research agent
 model = OpenAIModel("gpt-4")
