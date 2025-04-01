@@ -1,8 +1,14 @@
 import streamlit as st
 import asyncio
-from models.company_agent import CompanyResearchAgent, CompanyResearchRequest
+import sys
+import os
+
+# Add the backend directory to the Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from app.models.company_agent import CompanyResearchAgent, CompanyResearchRequest
 from pydantic_ai.models.openai import OpenAIModel
-from core.config import settings
+from app.core.config import settings
 
 # Initialize the research agent
 model = OpenAIModel("gpt-4")
