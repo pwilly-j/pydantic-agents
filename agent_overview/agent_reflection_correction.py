@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from pydantic_ai import Agent, RunContext, Tool, ModelRetry
 from pydantic_ai.models.openai import OpenAIModel
 
-from markdown import to_markdown
+import markdown
 
 nest_asyncio.apply()
 
@@ -92,7 +92,7 @@ def get_shipping_status(order_id: str) -> str:
 #Add dynamic systme prompt based on dependencies
 @agent_6.system_prompt
 async def add_customer_name(ctx: RunContext[CustomerDetails]) -> str:
-    return f"Customer details: {to_markdown(ctx.deps)}"
+    return f"Customer details: {markdown.to_markdown(ctx.deps)}"
 
 response = agent_6.run_sync(
     user_prompt="What is the status of my last order 12345?", deps=customer)

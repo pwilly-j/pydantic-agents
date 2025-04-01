@@ -224,7 +224,7 @@ class CompanyResearchAgent(Agent):
         except Exception:
             return False
 
-    @agent.tool
+    @Tool(name="scrape_company_website")
     async def get_website_info(self, ctx: RunContext[CompanyResearchRequest]) -> Dict:
         """
         Get information from the company's website.
@@ -274,7 +274,7 @@ class CompanyResearchAgent(Agent):
                 "error": str(e)
             }
 
-    @agent.tool
+    @Tool(name="fetch_linkedin_company_data")
     async def get_linkedin_info(self, ctx: RunContext[CompanyResearchRequest]) -> Dict:
         """
         Get information from the company's LinkedIn profile using the LinkedIn API.
